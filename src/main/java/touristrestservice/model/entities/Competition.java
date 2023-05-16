@@ -15,10 +15,7 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
-public class Competition {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Competition extends BaseEntity {
 
     private String name;
 
@@ -31,17 +28,4 @@ public class Competition {
             inverseJoinColumns = { @JoinColumn(name = "tourist_id") }
     )
     private Set<Tourist> tourists = new HashSet<>();
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Competition that = (Competition) o;
-        return Objects.equals(getId(), that.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return Math.toIntExact(getId());
-    }
 }

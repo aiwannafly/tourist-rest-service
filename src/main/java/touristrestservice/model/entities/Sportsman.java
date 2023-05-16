@@ -12,29 +12,9 @@ import java.util.Objects;
 @Setter
 @ToString
 @Table(name = "sportsman")
-public class Sportsman {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Sportsman extends BaseEntity {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "tourist_id", referencedColumnName = "id")
     private Tourist tourist;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || o.getClass() != getClass()) {
-            return false;
-        }
-        Sportsman s = (Sportsman) o;
-        return Objects.equals(s.getId(), getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return Math.toIntExact(getId());
-    }
 }

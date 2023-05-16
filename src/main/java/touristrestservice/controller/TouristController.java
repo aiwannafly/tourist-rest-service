@@ -1,7 +1,6 @@
 package touristrestservice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +22,7 @@ public class TouristController implements TouristApi {
 
     @Override
     public ResponseEntity<Tourist> touristIdGet(Long id)  {
-        Optional<Tourist> res = touristService.getById(id);
+        Optional<Tourist> res = touristService.get(id);
         if (res.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -33,7 +32,7 @@ public class TouristController implements TouristApi {
     @Override
     public ResponseEntity<Tourist> saveTourist(Tourist tourist) {
         try {
-            return ResponseEntity.ok(touristService.save(tourist));
+            return ResponseEntity.ok(touristService.create(tourist));
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -41,7 +40,8 @@ public class TouristController implements TouristApi {
 
     @Override
     public ResponseEntity<Tourist> updateTourist(Long id, Tourist tourist) {
-        Optional<Tourist> res = touristService.update(id, tourist);
+        tourist.setId(id);
+        Optional<Tourist> res = touristService.update(tourist);
         if (res.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -50,10 +50,10 @@ public class TouristController implements TouristApi {
 
     @Override
     public ResponseEntity<Long> deleteTourist(Long id)  {
-        boolean deleted = touristService.deleteById(id);
-        if (!deleted) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        touristService.delete(id);
+//        if (!deleted) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -13,10 +13,7 @@ import java.time.DayOfWeek;
 @ToString
 @Entity
 @Table(name = "schedule")
-public class Schedule {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+public class Schedule extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "group_id", referencedColumnName = "id")

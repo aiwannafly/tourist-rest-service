@@ -13,10 +13,7 @@ import java.util.Set;
 @Setter
 @ToString
 @Table(name = "section_group")
-public class Group {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Group extends BaseEntity {
 
     private String name;
 
@@ -31,16 +28,4 @@ public class Group {
     @OneToMany(mappedBy = "group", fetch = FetchType.LAZY)
     private Set<Tourist> tourists;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Group that = (Group) o;
-        return Objects.equals(getId(), that.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return Math.toIntExact(getId());
-    }
 }

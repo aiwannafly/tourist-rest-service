@@ -11,10 +11,7 @@ import touristrestservice.model.entities.enums.RouteType;
 @ToString
 @Entity
 @Table(name = "route")
-public class Route {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Route extends BaseEntity {
 
     private String name;
 

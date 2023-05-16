@@ -15,11 +15,7 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
-public class Tourist {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class Tourist extends BaseEntity {
     private String gender;
 
     @Column(name = "first_name")
@@ -66,21 +62,4 @@ public class Tourist {
             inverseJoinColumns = { @JoinColumn(name = "trip_id") }
     )
     private Set<Trip> trips = new HashSet<>();
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || o.getClass() != getClass()) {
-            return false;
-        }
-        Tourist t = (Tourist) o;
-        return Objects.equals(t.getId(), getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return Math.toIntExact(getId());
-    }
 }

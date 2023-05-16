@@ -1,16 +1,23 @@
 package touristrestservice.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import touristrestservice.model.entities.Tourist;
+import touristrestservice.model.repository.BaseRepository;
+import touristrestservice.model.repository.TouristRepository;
 
-import java.util.Optional;
+@Service
+public class TouristService implements BaseService<Tourist> {
 
-public interface TouristService {
+    TouristRepository touristRepository;
 
-    Optional<Tourist> getById(Long id);
+    @Autowired
+    void setTouristRepository(TouristRepository touristRepository) {
+        this.touristRepository = touristRepository;
+    }
 
-    Tourist save(Tourist tourist);
-
-    Optional<Tourist> update(Long id, Tourist tourist);
-
-    boolean deleteById(Long id);
+    @Override
+    public BaseRepository<Tourist> getRepository() {
+        return touristRepository;
+    }
 }

@@ -13,10 +13,7 @@ import java.util.Set;
 @Setter
 @ToString
 @Table(name = "section_manager")
-public class SectionManager {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class SectionManager extends BaseEntity {
 
     @Column(name = "first_name")
     private String firstName;
@@ -33,16 +30,4 @@ public class SectionManager {
     @OneToMany(mappedBy = "sectionManager", fetch = FetchType.LAZY)
     private Set<Section> sectionSet;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SectionManager manager = (SectionManager) o;
-        return Objects.equals(getId(), manager.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return Math.toIntExact(getId());
-    }
 }

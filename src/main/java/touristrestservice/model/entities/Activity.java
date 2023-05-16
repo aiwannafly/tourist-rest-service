@@ -14,11 +14,7 @@ import java.util.Set;
 @ToString
 @Entity
 @Table(name = "activity")
-public class Activity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class Activity extends BaseEntity {
     private Date date;
 
     @ManyToOne

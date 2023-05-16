@@ -17,10 +17,7 @@ import java.util.Set;
 @ToString
 @Entity
 @Table(name = "trip")
-public class Trip {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Trip extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "route_id")

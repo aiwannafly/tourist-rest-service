@@ -12,10 +12,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-public class Section {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Section extends BaseEntity {
 
     private String name;
 
@@ -23,20 +20,4 @@ public class Section {
     @JoinColumn(name = "manager_id", referencedColumnName = "id")
     private SectionManager sectionManager;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || o.getClass() != getClass()) {
-            return false;
-        }
-        Section s = (Section) o;
-        return Objects.equals(s.getId(), getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return Math.toIntExact(getId());
-    }
 }
