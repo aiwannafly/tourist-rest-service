@@ -14,7 +14,7 @@ public interface TrainerApi {
     @GetMapping(value = API + "/{id}", produces = "application/json")
     ResponseEntity<Trainer> getById(@PathVariable("id") Long id);
 
-    @GetMapping(value = "activities", produces = "application/json")
+    @GetMapping(value = API + "s", produces = "application/json")
     ResponseEntity<List<Trainer>> getAll();
 
     @PostMapping(value = API, produces = "application/json")

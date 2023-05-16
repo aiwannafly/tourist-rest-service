@@ -9,12 +9,12 @@ import java.util.List;
 
 @RequestMapping(Constants.BASE_API_PATH)
 public interface SportsmanApi {
-    String API = "/competition";
+    String API = "/sportsman";
 
     @GetMapping(value = API + "/{id}", produces = "application/json")
     ResponseEntity<Sportsman> getById(@PathVariable("id") Long id);
 
-    @GetMapping(value = "activities", produces = "application/json")
+    @GetMapping(value = "/sportsmen", produces = "application/json")
     ResponseEntity<List<Sportsman>> getAll();
 
     @PostMapping(value = API, produces = "application/json")

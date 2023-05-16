@@ -14,7 +14,7 @@ public interface GroupApi {
     @GetMapping(value = API + "/{id}", produces = "application/json")
     ResponseEntity<Group> getById(@PathVariable("id") Long id);
 
-    @GetMapping(value = "activities", produces = "application/json")
+    @GetMapping(value = API + "s", produces = "application/json")
     ResponseEntity<List<Group>> getAll();
 
     @PostMapping(value = API, produces = "application/json")

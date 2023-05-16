@@ -14,7 +14,7 @@ public interface ScheduleApi {
     @GetMapping(value = API + "/{id}", produces = "application/json")
     ResponseEntity<Schedule> getById(@PathVariable("id") Long id);
 
-    @GetMapping(value = "activities", produces = "application/json")
+    @GetMapping(value = API + "s", produces = "application/json")
     ResponseEntity<List<Schedule>> getAll();
 
     @PostMapping(value = API, produces = "application/json")

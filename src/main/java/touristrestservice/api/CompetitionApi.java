@@ -14,7 +14,7 @@ public interface CompetitionApi {
     @GetMapping(value = API + "/{id}", produces = "application/json")
     ResponseEntity<Competition> getById(@PathVariable("id") Long id);
 
-    @GetMapping(value = "activities", produces = "application/json")
+    @GetMapping(value = API + "s", produces = "application/json")
     ResponseEntity<List<Competition>> getAll();
 
     @PostMapping(value = API, produces = "application/json")

@@ -14,7 +14,7 @@ public interface TripApi {
     @GetMapping(value = API + "/{id}", produces = "application/json")
     ResponseEntity<Trip> getById(@PathVariable("id") Long id);
 
-    @GetMapping(value = "activities", produces = "application/json")
+    @GetMapping(value = API + "s", produces = "application/json")
     ResponseEntity<List<Trip>> getAll();
 
     @PostMapping(value = API, produces = "application/json")

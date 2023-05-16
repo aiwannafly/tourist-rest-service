@@ -14,7 +14,7 @@ public interface AmateurApi {
     @GetMapping(value = API + "/{id}", produces = "application/json")
     ResponseEntity<Amateur> getById(@PathVariable("id") Long id);
 
-    @GetMapping(value = "activities", produces = "application/json")
+    @GetMapping(value = API + "s", produces = "application/json")
     ResponseEntity<List<Amateur>> getAll();
 
     @PostMapping(value = API, produces = "application/json")

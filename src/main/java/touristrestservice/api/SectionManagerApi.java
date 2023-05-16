@@ -14,7 +14,7 @@ public interface SectionManagerApi {
     @GetMapping(value = API + "/{id}", produces = "application/json")
     ResponseEntity<SectionManager> getById(@PathVariable("id") Long id);
 
-    @GetMapping(value = "activities", produces = "application/json")
+    @GetMapping(value = API + "s", produces = "application/json")
     ResponseEntity<List<SectionManager>> getAll();
 
     @PostMapping(value = API, produces = "application/json")

@@ -14,7 +14,7 @@ public interface ActivityApi {
     @GetMapping(value = API + "/{id}", produces = "application/json")
     ResponseEntity<Activity> getById(@PathVariable("id") Long id);
 
-    @GetMapping(value = "activities", produces = "application/json")
+    @GetMapping(value = "/activities", produces = "application/json")
     ResponseEntity<List<Activity>> getAll();
 
     @PostMapping(value = API, produces = "application/json")
