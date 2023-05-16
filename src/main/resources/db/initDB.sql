@@ -17,7 +17,8 @@ CREATE TABLE IF NOT EXISTS tourist (
     first_name varchar(32) NOT NULL,
     second_name varchar(32) NOT NULL,
     gender varchar(1) CHECK(gender ='m' OR gender='f'),
-    birth_year int CHECK (birth_year > 0)
+    birth_year int CHECK (birth_year > 0),
+    skill_category varchar(32) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS competition (
@@ -37,6 +38,16 @@ CREATE TABLE IF NOT EXISTS trainer (
     section_id int REFERENCES section(id)
 );
 
+CREATE TABLE IF NOT EXISTS sportsman (
+    id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    tourist_id int REFERENCES tourist(id)
+);
+
+CREATE TABLE IF NOT EXISTS amateur (
+    id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    tourist_id int REFERENCES tourist(id)
+);
+
 CREATE TABLE IF NOT EXISTS section_group (
     id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name varchar(40) NOT NULL UNIQUE,
@@ -47,4 +58,47 @@ CREATE TABLE IF NOT EXISTS section_group (
 CREATE TABLE IF NOT EXISTS tourist_group (
     tourist_id int REFERENCES tourist(id),
     group_id int REFERENCES section_group(id)
+);
+
+CREATE TABLE IF NOT EXISTS schedule (
+    id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    section_id int REFERENCES section(id),
+    group_id int REFERENCES section_group(id),
+    trainer_id int REFERENCES trainer(id),
+    day_of_week varchar(12) NOT NULL,
+    duration_mins int NOT NULL,
+    time_of_day time NOT NULL,
+    UNIQUE(day_of_week, time_of_day)
+);
+
+CREATE TABLE IF NOT EXISTS activity (
+    id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    schedule_id int REFERENCES schedule(id),
+    date date NOT NULL,
+    UNIQUE(schedule_id, date)
+);
+
+CREATE TABLE IF NOT EXISTS attendance (
+    activity_id int REFERENCES activity(id),
+    student_id int REFERENCES tourist(id)
+);
+
+CREATE TABLE IF NOT EXISTS route (
+    id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name varchar(100) NOT NULL UNIQUE,
+    route_type varchar(32) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS trip (
+    id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    route_id int REFERENCES route(id),
+    instructor_id int REFERENCES tourist(id),
+    start_date date NOT NULL,
+    duration interval NOT NULL,
+    UNIQUE(route_id, start_date)
+);
+
+CREATE TABLE IF NOT EXISTS tourist_trip (
+    tourist_id int REFERENCES tourist(id),
+    trip_id int REFERENCES trip(id)
 );

@@ -8,5 +8,9 @@ public interface TouristService {
 
     Optional<Tourist> getById(Long id);
 
-    Long save(Tourist tourist);
+    Tourist save(Tourist tourist);
+
+    Optional<Tourist> update(Long id, Tourist tourist);
+
+    boolean deleteById(Long id);
 }

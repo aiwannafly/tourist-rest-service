@@ -22,7 +22,29 @@ public class TouristServiceImpl implements TouristService {
     }
 
     @Override
-    public Long save(Tourist tourist) {
-        return null;
+    public Tourist save(Tourist tourist) {
+        tourist.setId(null);
+        return touristRepository.save(tourist);
+    }
+
+    @Override
+    public Optional<Tourist> update(Long id, Tourist tourist) {
+        Optional<Tourist> prevTourist = touristRepository.findById(id);
+        if (prevTourist.isEmpty()) {
+            return Optional.empty();
+        }
+        tourist.setId(id);
+        touristRepository.save(tourist);
+        return Optional.of(tourist);
+    }
+
+    @Override
+    public boolean deleteById(Long id) {
+        Optional<Tourist> tourist = touristRepository.findById(id);
+        if (tourist.isEmpty()) {
+            return false;
+        }
+        touristRepository.delete(tourist.get());
+        return true;
     }
 }
