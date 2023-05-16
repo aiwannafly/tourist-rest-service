@@ -3,28 +3,26 @@ package touristrestservice.api;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import touristrestservice.config.Constants;
-import touristrestservice.model.entities.*;
+import touristrestservice.model.entities.Activity;
 
 import java.util.List;
 
 @RequestMapping(Constants.BASE_API_PATH)
-public interface TouristApi {
-    String API = "/tourist";
+public interface ActivityApi {
+    String API = "/activity";
 
     @GetMapping(value = API + "/{id}", produces = "application/json")
-    ResponseEntity<Tourist> getById(@PathVariable("id") Long id);
+    ResponseEntity<Activity> getById(@PathVariable("id") Long id);
 
-    @GetMapping(value = API + "s", produces = "application/json")
-    ResponseEntity<List<Tourist>> getAll();
+    @GetMapping(value = "activities", produces = "application/json")
+    ResponseEntity<List<Activity>> getAll();
 
     @PostMapping(value = API, produces = "application/json")
-    ResponseEntity<Tourist> create(@RequestBody Tourist value);
+    ResponseEntity<Activity> create(@RequestBody Activity value);
 
     @PostMapping(value = API + "/{id}", produces = "application/json")
-    ResponseEntity<Tourist> update(@PathVariable("id") Long id, @RequestBody Tourist value);
+    ResponseEntity<Activity> update(@PathVariable("id") Long id, @RequestBody Activity value);
 
     @DeleteMapping(value = API + "/{id}")
     ResponseEntity<Long> delete(@PathVariable("id") Long id);
 }
-
-

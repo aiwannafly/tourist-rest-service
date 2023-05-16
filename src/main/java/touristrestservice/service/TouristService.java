@@ -2,22 +2,22 @@ package touristrestservice.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import touristrestservice.model.entities.Tourist;
-import touristrestservice.model.repository.BaseRepository;
-import touristrestservice.model.repository.TouristRepository;
+import touristrestservice.model.entities.*;
+import touristrestservice.model.repository.*;
 
 @Service
 public class TouristService implements BaseService<Tourist> {
 
-    TouristRepository touristRepository;
+    TouristRepository repository;
 
     @Autowired
-    void setTouristRepository(TouristRepository touristRepository) {
-        this.touristRepository = touristRepository;
+    void setRepository(TouristRepository repository) {
+        this.repository = repository;
     }
 
     @Override
     public BaseRepository<Tourist> getRepository() {
-        return touristRepository;
+        return repository;
     }
 }
+

@@ -29,8 +29,11 @@ public interface BaseService<T extends BaseEntity> {
         return getRepository().findAll();
     }
 
-    default void delete(Long id) {
-        getRepository().deleteById(id);
+    default boolean delete(Long id) {
+        if (getRepository().existsById(id)) {
+            getRepository().deleteById(id);
+            return true;
+        }
+        return false;
     }
-
 }

@@ -3,44 +3,45 @@ package touristrestservice.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-import touristrestservice.api.*;
-import touristrestservice.model.entities.*;
-import touristrestservice.service.*;
+import touristrestservice.api.SectionApi;
+import touristrestservice.model.entities.Section;
+import touristrestservice.service.BaseService;
+import touristrestservice.service.SectionService;
 
 import java.util.List;
 
 @RestController
-public class TouristController extends BaseController<Tourist> implements TouristApi {
+public class SectionController extends BaseController<Section> implements SectionApi {
 
-    private final TouristService service;
+    private final SectionService service;
 
     @Autowired
-    public TouristController(TouristService service) {
+    public SectionController(SectionService service) {
         this.service = service;
     }
 
     @Override
-    BaseService<Tourist> getService() {
+    BaseService<Section> getService() {
         return service;
     }
 
     @Override
-    public ResponseEntity<Tourist> getById(Long id) {
+    public ResponseEntity<Section> getById(Long id) {
         return super.getById(id);
     }
 
     @Override
-    public ResponseEntity<List<Tourist>> getAll() {
+    public ResponseEntity<List<Section>> getAll() {
         return super.getAll();
     }
 
     @Override
-    public ResponseEntity<Tourist> create(Tourist value) {
+    public ResponseEntity<Section> create(Section value) {
         return super.create(value);
     }
 
     @Override
-    public ResponseEntity<Tourist> update(Long id, Tourist value) {
+    public ResponseEntity<Section> update(Long id, Section value) {
         return super.update(id, value);
     }
 
@@ -49,4 +50,3 @@ public class TouristController extends BaseController<Tourist> implements Touris
         return super.delete(id);
     }
 }
-
