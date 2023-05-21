@@ -11,6 +11,7 @@ public interface BaseService<T extends BaseEntity> {
     BaseRepository<T> getRepository();
 
     default T create(T t) {
+        t.setId(0L);
         return getRepository().save(t);
     }
 

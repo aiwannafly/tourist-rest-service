@@ -1,27 +1,27 @@
-package touristrestservice.api;
+package touristrestservice.api.crud;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import touristrestservice.config.Constants;
-import touristrestservice.model.entities.Section;
+import touristrestservice.model.entities.Schedule;
 
 import java.util.List;
 
 @RequestMapping(Constants.BASE_API_PATH)
-public interface SectionApi {
-    String API = "/section";
+public interface ScheduleApi {
+    String API = "/schedule";
 
     @GetMapping(value = API + "/{id}", produces = "application/json")
-    ResponseEntity<Section> getById(@PathVariable("id") Long id);
+    ResponseEntity<Schedule> getById(@PathVariable("id") Long id);
 
     @GetMapping(value = API + "s", produces = "application/json")
-    ResponseEntity<List<Section>> getAll();
+    ResponseEntity<List<Schedule>> getAll();
 
     @PostMapping(value = API, produces = "application/json")
-    ResponseEntity<Section> create(@RequestBody Section value);
+    ResponseEntity<Schedule> create(@RequestBody Schedule value);
 
     @PostMapping(value = API + "/{id}", produces = "application/json")
-    ResponseEntity<Section> update(@PathVariable("id") Long id, @RequestBody Section value);
+    ResponseEntity<Schedule> update(@PathVariable("id") Long id, @RequestBody Schedule value);
 
     @DeleteMapping(value = API + "/{id}")
     ResponseEntity<Long> delete(@PathVariable("id") Long id);

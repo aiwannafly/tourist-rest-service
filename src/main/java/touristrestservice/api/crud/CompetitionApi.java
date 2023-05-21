@@ -1,4 +1,4 @@
-package touristrestservice.api;
+package touristrestservice.api.crud;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

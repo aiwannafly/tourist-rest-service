@@ -1,47 +1,47 @@
-package touristrestservice.controller;
+package touristrestservice.controller.crud;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-import touristrestservice.api.RouteApi;
-import touristrestservice.model.entities.Route;
+import touristrestservice.api.crud.SportsmanApi;
+import touristrestservice.model.entities.Sportsman;
 import touristrestservice.service.BaseService;
-import touristrestservice.service.RouteService;
+import touristrestservice.service.SportsmanService;
 
 import java.util.List;
 
 @RestController
-public class RouteController extends BaseController<Route> implements RouteApi {
+public class SportsmanController extends BaseController<Sportsman> implements SportsmanApi {
 
-    private final RouteService service;
+    private final SportsmanService service;
 
     @Autowired
-    public RouteController(RouteService service) {
+    public SportsmanController(SportsmanService service) {
         this.service = service;
     }
 
     @Override
-    BaseService<Route> getService() {
+    BaseService<Sportsman> getService() {
         return service;
     }
 
     @Override
-    public ResponseEntity<Route> getById(Long id) {
+    public ResponseEntity<Sportsman> getById(Long id) {
         return super.getById(id);
     }
 
     @Override
-    public ResponseEntity<List<Route>> getAll() {
+    public ResponseEntity<List<Sportsman>> getAll() {
         return super.getAll();
     }
 
     @Override
-    public ResponseEntity<Route> create(Route value) {
+    public ResponseEntity<Sportsman> create(Sportsman value) {
         return super.create(value);
     }
 
     @Override
-    public ResponseEntity<Route> update(Long id, Route value) {
+    public ResponseEntity<Sportsman> update(Long id, Sportsman value) {
         return super.update(id, value);
     }
 

@@ -1,9 +1,9 @@
-package touristrestservice.controller;
+package touristrestservice.controller.crud;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-import touristrestservice.api.SectionManagerApi;
+import touristrestservice.api.crud.SectionManagerApi;
 import touristrestservice.model.entities.SectionManager;
 import touristrestservice.service.BaseService;
 import touristrestservice.service.SectionManagerService;

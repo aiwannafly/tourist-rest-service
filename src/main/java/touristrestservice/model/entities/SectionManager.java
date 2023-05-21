@@ -1,18 +1,19 @@
 package touristrestservice.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Getter
 @Setter
-@ToString
 @Table(name = "section_manager")
+@ToString(exclude = {"sectionSet"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "sectionSet"})
 public class SectionManager extends BaseEntity {
 
     @Column(name = "first_name")
@@ -27,7 +28,8 @@ public class SectionManager extends BaseEntity {
     @Column(name = "employment_year")
     private Integer employmentYear;
 
+    private Integer salary;
+
     @OneToMany(mappedBy = "sectionManager", fetch = FetchType.LAZY)
     private Set<Section> sectionSet;
-
 }

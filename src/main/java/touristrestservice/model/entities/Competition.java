@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Objects;
@@ -19,9 +20,9 @@ public class Competition extends BaseEntity {
 
     private String name;
 
-    private Timestamp date;
+    private Date date;
 
-    @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = { CascadeType.MERGE }, fetch = FetchType.LAZY)
     @JoinTable(
             name = "tourist_competition",
             joinColumns = { @JoinColumn(name = "competition_id") },

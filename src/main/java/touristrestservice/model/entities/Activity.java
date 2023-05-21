@@ -21,6 +21,11 @@ public class Activity extends BaseEntity {
     @JoinColumn(name = "schedule_id")
     private Schedule schedule;
 
-    @ManyToMany(mappedBy = "attendedActivities")
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "attendance",
+            joinColumns = { @JoinColumn(name = "activity_id") },
+            inverseJoinColumns = { @JoinColumn(name = "student_id") }
+    )
     private Set<Tourist> attended = new HashSet<>();
 }

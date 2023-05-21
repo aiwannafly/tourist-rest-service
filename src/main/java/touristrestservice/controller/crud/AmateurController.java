@@ -1,47 +1,47 @@
-package touristrestservice.controller;
+package touristrestservice.controller.crud;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-import touristrestservice.api.ScheduleApi;
-import touristrestservice.model.entities.Schedule;
+import touristrestservice.api.crud.AmateurApi;
+import touristrestservice.model.entities.Amateur;
+import touristrestservice.service.AmateurService;
 import touristrestservice.service.BaseService;
-import touristrestservice.service.ScheduleService;
 
 import java.util.List;
 
 @RestController
-public class ScheduleController extends BaseController<Schedule> implements ScheduleApi {
+public class AmateurController extends BaseController<Amateur> implements AmateurApi {
 
-    private final ScheduleService service;
+    private final AmateurService service;
 
     @Autowired
-    public ScheduleController(ScheduleService service) {
+    public AmateurController(AmateurService service) {
         this.service = service;
     }
 
     @Override
-    BaseService<Schedule> getService() {
+    BaseService<Amateur> getService() {
         return service;
     }
 
     @Override
-    public ResponseEntity<Schedule> getById(Long id) {
+    public ResponseEntity<Amateur> getById(Long id) {
         return super.getById(id);
     }
 
     @Override
-    public ResponseEntity<List<Schedule>> getAll() {
+    public ResponseEntity<List<Amateur>> getAll() {
         return super.getAll();
     }
 
     @Override
-    public ResponseEntity<Schedule> create(Schedule value) {
+    public ResponseEntity<Amateur> create(Amateur value) {
         return super.create(value);
     }
 
     @Override
-    public ResponseEntity<Schedule> update(Long id, Schedule value) {
+    public ResponseEntity<Amateur> update(Long id, Amateur value) {
         return super.update(id, value);
     }
 

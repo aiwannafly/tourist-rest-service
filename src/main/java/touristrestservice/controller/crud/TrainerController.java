@@ -1,47 +1,47 @@
-package touristrestservice.controller;
+package touristrestservice.controller.crud;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-import touristrestservice.api.GroupApi;
-import touristrestservice.model.entities.Group;
+import touristrestservice.api.crud.TrainerApi;
+import touristrestservice.model.entities.Trainer;
 import touristrestservice.service.BaseService;
-import touristrestservice.service.GroupService;
+import touristrestservice.service.TrainerService;
 
 import java.util.List;
 
 @RestController
-public class GroupController extends BaseController<Group> implements GroupApi {
+public class TrainerController extends BaseController<Trainer> implements TrainerApi {
 
-    private final GroupService service;
+    private final TrainerService service;
 
     @Autowired
-    public GroupController(GroupService service) {
+    public TrainerController(TrainerService service) {
         this.service = service;
     }
 
     @Override
-    BaseService<Group> getService() {
+    BaseService<Trainer> getService() {
         return service;
     }
 
     @Override
-    public ResponseEntity<Group> getById(Long id) {
+    public ResponseEntity<Trainer> getById(Long id) {
         return super.getById(id);
     }
 
     @Override
-    public ResponseEntity<List<Group>> getAll() {
+    public ResponseEntity<List<Trainer>> getAll() {
         return super.getAll();
     }
 
     @Override
-    public ResponseEntity<Group> create(Group value) {
+    public ResponseEntity<Trainer> create(Trainer value) {
         return super.create(value);
     }
 
     @Override
-    public ResponseEntity<Group> update(Long id, Group value) {
+    public ResponseEntity<Trainer> update(Long id, Trainer value) {
         return super.update(id, value);
     }
 

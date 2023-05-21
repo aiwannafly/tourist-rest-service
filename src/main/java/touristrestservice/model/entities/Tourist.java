@@ -1,5 +1,6 @@
 package touristrestservice.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +8,6 @@ import lombok.ToString;
 import touristrestservice.model.entities.enums.SkillCategory;
 
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -15,6 +15,8 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler", "attendedActivities",
+"trips", "competitions"})
 public class Tourist extends BaseEntity {
     private String gender;
 
@@ -31,7 +33,8 @@ public class Tourist extends BaseEntity {
     @Column(name = "skill_category")
     private SkillCategory skillCategory;
 
-    @ManyToOne
+    @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"}, allowSetters = true)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinTable(
             name = "tourist_group",
             joinColumns = { @JoinColumn(name = "tourist_id") },
@@ -39,27 +42,12 @@ public class Tourist extends BaseEntity {
     )
     private Group group;
 
-    @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "tourist_competition",
-            joinColumns = { @JoinColumn(name = "tourist_id") },
-            inverseJoinColumns = { @JoinColumn(name = "competition_id") }
-    )
+    @ManyToMany(mappedBy = "tourists")
     private Set<Competition> competitions = new HashSet<>();
 
-    @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "attendance",
-            joinColumns = { @JoinColumn(name = "student_id") },
-            inverseJoinColumns = { @JoinColumn(name = "activity_id") }
-    )
+    @ManyToMany(mappedBy = "attended")
     private Set<Activity> attendedActivities = new HashSet<>();
 
-    @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "tourist_trip",
-            joinColumns = { @JoinColumn(name = "tourist_id") },
-            inverseJoinColumns = { @JoinColumn(name = "trip_id") }
-    )
+    @ManyToMany(mappedBy = "tourists")
     private Set<Trip> trips = new HashSet<>();
 }

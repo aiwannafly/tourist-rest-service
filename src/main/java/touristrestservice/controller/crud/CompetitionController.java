@@ -1,47 +1,47 @@
-package touristrestservice.controller;
+package touristrestservice.controller.crud;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-import touristrestservice.api.TrainerApi;
-import touristrestservice.model.entities.Trainer;
+import touristrestservice.api.crud.CompetitionApi;
+import touristrestservice.model.entities.Competition;
 import touristrestservice.service.BaseService;
-import touristrestservice.service.TrainerService;
+import touristrestservice.service.CompetitionService;
 
 import java.util.List;
 
 @RestController
-public class TrainerController extends BaseController<Trainer> implements TrainerApi {
+public class CompetitionController extends BaseController<Competition> implements CompetitionApi {
 
-    private final TrainerService service;
+    private final CompetitionService service;
 
     @Autowired
-    public TrainerController(TrainerService service) {
+    public CompetitionController(CompetitionService service) {
         this.service = service;
     }
 
     @Override
-    BaseService<Trainer> getService() {
+    BaseService<Competition> getService() {
         return service;
     }
 
     @Override
-    public ResponseEntity<Trainer> getById(Long id) {
+    public ResponseEntity<Competition> getById(Long id) {
         return super.getById(id);
     }
 
     @Override
-    public ResponseEntity<List<Trainer>> getAll() {
+    public ResponseEntity<List<Competition>> getAll() {
         return super.getAll();
     }
 
     @Override
-    public ResponseEntity<Trainer> create(Trainer value) {
+    public ResponseEntity<Competition> create(Competition value) {
         return super.create(value);
     }
 
     @Override
-    public ResponseEntity<Trainer> update(Long id, Trainer value) {
+    public ResponseEntity<Competition> update(Long id, Competition value) {
         return super.update(id, value);
     }
 

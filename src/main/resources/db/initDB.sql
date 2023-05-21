@@ -1,9 +1,27 @@
+-- DROP TABLE IF EXISTS tourist_trip;
+-- DROP TABLE IF EXISTS trip;
+-- DROP TABLE IF EXISTS route;
+-- DROP TABLE IF EXISTS attendance;
+-- DROP TABLE IF EXISTS activity;
+-- DROP TABLE IF EXISTS schedule;
+-- DROP TABLE IF EXISTS tourist_group;
+-- DROP TABLE IF EXISTS section_group;
+-- DROP TABLE IF EXISTS amateur;
+-- DROP TABLE IF EXISTS sportsman;
+-- DROP TABLE IF EXISTS trainer;
+-- DROP TABLE IF EXISTS tourist_competition;
+-- DROP TABLE IF EXISTS competition;
+-- DROP TABLE IF EXISTS tourist;
+-- DROP TABLE IF EXISTS section;
+-- DROP TABLE IF EXISTS section_manager;
+
 CREATE TABLE IF NOT EXISTS section_manager (
     id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     first_name varchar(32) NOT NULL,
     second_name varchar(32) NOT NULL,
     birth_year int CHECK (birth_year > 0),
-    employment_year int CHECK (birth_year > 0)
+    employment_year int CHECK (birth_year > 0),
+    salary int CHECK (salary > 0) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS section (
@@ -24,7 +42,7 @@ CREATE TABLE IF NOT EXISTS tourist (
 CREATE TABLE IF NOT EXISTS competition (
     id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name varchar(50) NOT NULL,
-    date timestamp NOT NULL
+    date date NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS tourist_competition (
@@ -34,8 +52,9 @@ CREATE TABLE IF NOT EXISTS tourist_competition (
 
 CREATE TABLE IF NOT EXISTS trainer (
     id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    tourist_id int REFERENCES tourist(id),
-    section_id int REFERENCES section(id)
+    tourist_id int REFERENCES tourist(id) UNIQUE,
+    section_id int REFERENCES section(id),
+    salary int CHECK (salary > 0) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS sportsman (
@@ -51,7 +70,7 @@ CREATE TABLE IF NOT EXISTS amateur (
 CREATE TABLE IF NOT EXISTS section_group (
     id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name varchar(40) NOT NULL UNIQUE,
-    trainer_id int REFERENCES tourist(id),
+    trainer_id int REFERENCES trainer(id),
     section_id int REFERENCES section(id)
 );
 
@@ -94,7 +113,8 @@ CREATE TABLE IF NOT EXISTS trip (
     route_id int REFERENCES route(id),
     instructor_id int REFERENCES tourist(id),
     start_date date NOT NULL,
-    duration interval NOT NULL,
+    duration_days int NOT NULL,
+    required_skill_category varchar(32) NOT NULL,
     UNIQUE(route_id, start_date)
 );
 
