@@ -8,6 +8,7 @@ import touristrestservice.model.entities.Tourist;
 import touristrestservice.model.entities.enums.SkillCategory;
 import touristrestservice.service.TouristService;
 
+import java.sql.Date;
 import java.util.List;
 
 @RestController
@@ -21,13 +22,42 @@ public class TouristSearchController implements TouristSearchApi {
     }
 
     @Override
-    public ResponseEntity<List<Tourist>> findAll(List<String> genders, List<String> skillCategories) {
+    public ResponseEntity<List<Tourist>> findAll(List<String> genders, List<String> skillCategories, Integer minBirthYear,
+                                                 Integer maxBirthYear) {
         var enumSkills = skillCategories.stream().map(SkillCategory::fromString).toList();
-        return ResponseEntity.ok(touristService.findTouristsByGenderAndSkillCategory(genders, enumSkills));
+        return ResponseEntity.ok(touristService.findTouristsByGenderAndSkillCategory(genders, enumSkills, minBirthYear, maxBirthYear));
     }
 
     @Override
     public ResponseEntity<List<Tourist>> findByGroupId(Long id) {
         return ResponseEntity.ok(touristService.findTouristsByGroup(id));
+    }
+
+    @Override
+    public ResponseEntity<List<Tourist>> findAllByTrip(Long id, List<String> genders, List<String> skillCategories, Integer minBirthYear,
+                                                       Integer maxBirthYear) {
+        var enumSkills = skillCategories.stream().map(SkillCategory::fromString).toList();
+        return ResponseEntity.ok(touristService.findTouristsByGenderAndSkillCategoryAndTrip(genders, enumSkills, minBirthYear, maxBirthYear, id));
+    }
+
+    @Override
+    public ResponseEntity<List<Tourist>> findAllByTripsCount(List<String> genders, List<String> skillCategories, Integer minBirthYear,
+                                                             Integer maxBirthYear, Long tripsCount) {
+        var enumSkills = skillCategories.stream().map(SkillCategory::fromString).toList();
+        return ResponseEntity.ok(touristService.findTouristsByGenderAndSkillCategoryAndTripsCount(genders, enumSkills, minBirthYear, maxBirthYear, tripsCount));
+    }
+
+    @Override
+    public ResponseEntity<List<Tourist>> findAllByTripDate(List<String> genders, List<String> skillCategories, Integer minBirthYear,
+                                                           Integer maxBirthYear, Date date) {
+        var enumSkills = skillCategories.stream().map(SkillCategory::fromString).toList();
+        return ResponseEntity.ok(touristService.findTouristsByGenderAndSkillCategoryAndTripDate(genders, enumSkills, minBirthYear, maxBirthYear, date));
+    }
+
+    @Override
+    public ResponseEntity<List<Tourist>> findByRouteId(List<String> genders, List<String> skillCategories, Integer minBirthYear,
+                                                       Integer maxBirthYear, Long id) {
+        var enumSkills = skillCategories.stream().map(SkillCategory::fromString).toList();
+        return ResponseEntity.ok(touristService.findTouristsByGenderAndSkillAndRoute(genders, enumSkills, minBirthYear, maxBirthYear, id));
     }
 }

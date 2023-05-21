@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.context.annotation.Lazy;
 import touristrestservice.model.entities.enums.SkillCategory;
 
 import java.sql.Date;
@@ -26,6 +27,9 @@ public class Trip extends BaseEntity {
 
     @Column(name = "duration_days")
     private Integer durationDays;
+
+    @Column(name = "end_date")
+    private Date endDate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "required_skill_category")

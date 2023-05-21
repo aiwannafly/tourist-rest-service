@@ -113,6 +113,7 @@ CREATE TABLE IF NOT EXISTS trip (
     route_id int REFERENCES route(id),
     instructor_id int REFERENCES tourist(id),
     start_date date NOT NULL,
+    end_date date NOT NULL,
     duration_days int NOT NULL,
     required_skill_category varchar(32) NOT NULL,
     UNIQUE(route_id, start_date)

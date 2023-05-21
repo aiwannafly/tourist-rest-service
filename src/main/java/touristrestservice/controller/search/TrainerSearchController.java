@@ -22,4 +22,9 @@ public class TrainerSearchController implements TrainerSearchApi {
     public ResponseEntity<List<Trainer>> findTrainersBySectionId(Long sectionId) {
         return ResponseEntity.ok(trainerService.findTrainersBySectionId(sectionId));
     }
+
+    @Override
+    public ResponseEntity<List<Trainer>> findAllByFilters(List<String> genders, Integer minSalary, Integer maxSalary, Integer minBirthYear, Integer maxBirthYear) {
+        return ResponseEntity.ok(trainerService.findTrainersByGenderAndAgeAndSalary(genders, minSalary, maxSalary, minBirthYear, maxBirthYear));
+    }
 }

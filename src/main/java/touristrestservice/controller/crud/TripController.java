@@ -8,6 +8,7 @@ import touristrestservice.model.entities.Trip;
 import touristrestservice.service.BaseService;
 import touristrestservice.service.TripService;
 
+import java.sql.Date;
 import java.util.List;
 
 @RestController
@@ -37,11 +38,13 @@ public class TripController extends BaseController<Trip> implements TripApi {
 
     @Override
     public ResponseEntity<Trip> create(Trip value) {
+        value.setEndDate(new Date(value.getStartDate().getTime() + value.getDurationDays() * 24 * 60 * 60 * 1000));
         return super.create(value);
     }
 
     @Override
     public ResponseEntity<Trip> update(Long id, Trip value) {
+        value.setEndDate(new Date(value.getStartDate().getTime() + value.getDurationDays() * 24 * 60 * 60 * 1000));
         return super.update(id, value);
     }
 
