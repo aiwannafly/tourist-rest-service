@@ -1,10 +1,12 @@
 package touristrestservice.controller.crud;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import touristrestservice.api.crud.ActivityApi;
 import touristrestservice.model.entities.Activity;
+import touristrestservice.model.entities.Tourist;
 import touristrestservice.service.ActivityService;
 import touristrestservice.service.BaseService;
 
@@ -36,17 +38,29 @@ public class ActivityController extends BaseController<Activity> implements Acti
     }
 
     @Override
-    public ResponseEntity<Activity> create(Activity value) {
-        return super.create(value);
+    public ResponseEntity create(Activity value) {
+        try {
+            return super.create(value);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
     @Override
-    public ResponseEntity<Activity> update(Long id, Activity value) {
-        return super.update(id, value);
+    public ResponseEntity update(Long id, Activity value) {
+        try {
+            return super.update(id, value);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
     @Override
-    public ResponseEntity<Long> delete(Long id) {
-        return super.delete(id);
+    public ResponseEntity delete(Long id) {
+        try {
+            return super.delete(id);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 }

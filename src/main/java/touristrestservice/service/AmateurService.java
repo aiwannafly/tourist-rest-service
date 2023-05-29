@@ -7,7 +7,7 @@ import touristrestservice.model.repository.AmateurRepository;
 import touristrestservice.model.repository.BaseRepository;
 
 @Service
-public class AmateurService implements BaseService<Amateur> {
+public class AmateurService extends BaseService<Amateur> {
 
     AmateurRepository repository;
 

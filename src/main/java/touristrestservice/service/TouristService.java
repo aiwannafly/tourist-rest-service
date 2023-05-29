@@ -11,9 +11,11 @@ import touristrestservice.model.repository.*;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Service
-public class TouristService implements BaseService<Tourist> {
+public class TouristService extends BaseService<Tourist> {
 
     TouristRepository repository;
 
@@ -27,9 +29,25 @@ public class TouristService implements BaseService<Tourist> {
         return repository;
     }
 
+    @Override
+    protected void validateBeforeSave(Tourist t) throws IllegalArgumentException {
+        if (t.getGroup() != null) {
+            if (Objects.equals(t.getGroup().getTrainer().getTourist(), t)) {
+                throw new IllegalArgumentException("Trainer must not be a member of it's own group");
+            }
+        }
+    }
+
     public List<Tourist> findTouristsByGenderAndSkillCategory(List<String> genders, List<SkillCategory> skillCategories, Integer minBirthYear,
                                                               Integer maxBirthYear) {
         return repository.findTouristsByGenderAndSkillCategory(genders, skillCategories, minBirthYear, maxBirthYear);
+    }
+
+    public List<Tourist> findTouristsByGenderAndSkillCategoryAndGroup(List<String> genders,
+                                                                      List<SkillCategory> skillCategories,
+                                                                      Integer minBirthYear, Integer maxBirthYear,
+                                                                      Long groupId) {
+        return repository.findTouristsByGenderAndSkillCategoryAndGroup(genders, skillCategories, minBirthYear, maxBirthYear, groupId);
     }
 
     public List<Tourist> findTouristsByGroup(Long groupId) {
@@ -69,5 +87,17 @@ public class TouristService implements BaseService<Tourist> {
                                                               Integer maxBirthYear,
                                                               Long routeId) {
         return repository.findTouristsByGenderAndSkillAndRoute(genders, skillCategories, minBirthYear, maxBirthYear, routeId);
+    }
+
+    public List<Tourist> findTouristsByGenderAndSkillAndAttendedPlace(Long placeId) {
+        return repository.findTouristsByGenderAndSkillAndAttendedPlace(placeId);
+    }
+
+    public List<Tourist> findTouristsByGroupWhoHadTripWithTrainer(Long groupId) {
+        return repository.findTouristsByGroupWhoHadTripWithTrainer(groupId);
+    }
+
+    public List<Tourist> findTouristsByTakenRoutes(Long groupId, List<Long> routeIds) {
+        return repository.findTouristsByTakenRoutes(groupId, routeIds);
     }
 }

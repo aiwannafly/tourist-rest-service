@@ -1,45 +1,44 @@
 package touristrestservice.controller.crud;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-import touristrestservice.api.crud.GroupApi;
-import touristrestservice.model.entities.Group;
+import touristrestservice.api.crud.PlaceApi;
+import touristrestservice.model.entities.Place;
 import touristrestservice.model.entities.Tourist;
 import touristrestservice.service.BaseService;
-import touristrestservice.service.GroupService;
+import touristrestservice.service.PlaceService;
 
 import java.util.List;
-import java.util.Objects;
 
 @RestController
-public class GroupController extends BaseController<Group> implements GroupApi {
-
-    private final GroupService service;
+public class PlaceController extends BaseController<Place> implements PlaceApi {
+    private PlaceService placeService;
 
     @Autowired
-    public GroupController(GroupService service) {
-        this.service = service;
+    void setPlaceService(PlaceService placeService) {
+        this.placeService = placeService;
     }
 
     @Override
-    BaseService<Group> getService() {
-        return service;
+    BaseService<Place> getService() {
+        return placeService;
     }
 
     @Override
-    public ResponseEntity<Group> getById(Long id) {
+    public ResponseEntity<Place> getById(Long id) {
         return super.getById(id);
     }
 
     @Override
-    public ResponseEntity<List<Group>> getAll() {
+    public ResponseEntity<List<Place>> getAll() {
         return super.getAll();
     }
 
     @Override
-    public ResponseEntity create(Group value) {
+    public ResponseEntity create(Place value) {
         try {
             return super.create(value);
         } catch (Exception e) {
@@ -48,7 +47,7 @@ public class GroupController extends BaseController<Group> implements GroupApi {
     }
 
     @Override
-    public ResponseEntity update(Long id, Group value) {
+    public ResponseEntity update(Long id, Place value) {
         try {
             return super.update(id, value);
         } catch (Exception e) {

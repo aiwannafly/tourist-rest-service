@@ -7,7 +7,7 @@ import touristrestservice.model.repository.BaseRepository;
 import touristrestservice.model.repository.SectionRepository;
 
 @Service
-public class SectionService implements BaseService<Section> {
+public class SectionService extends BaseService<Section> {
 
     SectionRepository repository;
 

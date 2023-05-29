@@ -25,11 +25,7 @@ public abstract class BaseController<T extends BaseEntity> {
     }
 
     public ResponseEntity<T> create(T value) {
-        try {
-            return ResponseEntity.ok(getService().create(value));
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+        return ResponseEntity.ok(getService().create(value));
     }
 
     public ResponseEntity<T> update(Long id, T value) {

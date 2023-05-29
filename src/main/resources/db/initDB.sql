@@ -1,6 +1,9 @@
 -- DROP TABLE IF EXISTS tourist_trip;
 -- DROP TABLE IF EXISTS trip;
+-- DROP TABLE IF EXISTS instructor;
+-- DROP TABLE IF EXISTS route_place;
 -- DROP TABLE IF EXISTS route;
+-- DROP TABLE IF EXISTS place;
 -- DROP TABLE IF EXISTS attendance;
 -- DROP TABLE IF EXISTS activity;
 -- DROP TABLE IF EXISTS schedule;
@@ -26,7 +29,7 @@ CREATE TABLE IF NOT EXISTS section_manager (
 
 CREATE TABLE IF NOT EXISTS section (
     id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    name varchar(50) NOT NULL,
+    name varchar(50) NOT NULL UNIQUE,
     manager_id int REFERENCES section_manager(id)
 );
 
@@ -59,12 +62,12 @@ CREATE TABLE IF NOT EXISTS trainer (
 
 CREATE TABLE IF NOT EXISTS sportsman (
     id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    tourist_id int REFERENCES tourist(id)
+    tourist_id int REFERENCES tourist(id) UNIQUE
 );
 
 CREATE TABLE IF NOT EXISTS amateur (
     id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    tourist_id int REFERENCES tourist(id)
+    tourist_id int REFERENCES tourist(id) UNIQUE
 );
 
 CREATE TABLE IF NOT EXISTS section_group (
@@ -87,7 +90,7 @@ CREATE TABLE IF NOT EXISTS schedule (
     day_of_week varchar(12) NOT NULL,
     duration_mins int NOT NULL,
     time_of_day time NOT NULL,
-    UNIQUE(day_of_week, time_of_day)
+    UNIQUE(group_id, day_of_week, time_of_day)
 );
 
 CREATE TABLE IF NOT EXISTS activity (
@@ -105,7 +108,22 @@ CREATE TABLE IF NOT EXISTS attendance (
 CREATE TABLE IF NOT EXISTS route (
     id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name varchar(100) NOT NULL UNIQUE,
+    length_km int NOT NUll,
     route_type varchar(32) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS place (
+    id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name varchar(100) NOT NULL UNIQUE,
+    address varchar(250) NOT NULL,
+    latitude double precision NOT NULL,
+    longitude double precision NOT NULL,
+    UNIQUE(latitude, longitude)
+);
+
+CREATE TABLE IF NOT EXISTS route_place (
+    route_id bigint REFERENCES route(id),
+    place_id bigint REFERENCES place(id)
 );
 
 CREATE TABLE IF NOT EXISTS trip (

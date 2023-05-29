@@ -13,7 +13,7 @@ import java.util.Set;
 @Setter
 @Table(name = "section_manager")
 @ToString(exclude = {"sectionSet"})
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "sectionSet"})
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler", "sectionSet"}, allowSetters = true)
 public class SectionManager extends BaseEntity {
 
     @Column(name = "first_name")

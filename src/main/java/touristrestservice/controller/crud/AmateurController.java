@@ -1,10 +1,12 @@
 package touristrestservice.controller.crud;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import touristrestservice.api.crud.AmateurApi;
 import touristrestservice.model.entities.Amateur;
+import touristrestservice.model.entities.Tourist;
 import touristrestservice.service.AmateurService;
 import touristrestservice.service.BaseService;
 
@@ -36,17 +38,29 @@ public class AmateurController extends BaseController<Amateur> implements Amateu
     }
 
     @Override
-    public ResponseEntity<Amateur> create(Amateur value) {
-        return super.create(value);
+    public ResponseEntity create(Amateur value) {
+        try {
+            return super.create(value);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
     @Override
-    public ResponseEntity<Amateur> update(Long id, Amateur value) {
-        return super.update(id, value);
+    public ResponseEntity update(Long id, Amateur value) {
+        try {
+            return super.update(id, value);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
     @Override
-    public ResponseEntity<Long> delete(Long id) {
-        return super.delete(id);
+    public ResponseEntity delete(Long id) {
+        try {
+            return super.delete(id);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 }

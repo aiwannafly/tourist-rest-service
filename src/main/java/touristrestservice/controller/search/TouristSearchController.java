@@ -60,4 +60,27 @@ public class TouristSearchController implements TouristSearchApi {
         var enumSkills = skillCategories.stream().map(SkillCategory::fromString).toList();
         return ResponseEntity.ok(touristService.findTouristsByGenderAndSkillAndRoute(genders, enumSkills, minBirthYear, maxBirthYear, id));
     }
+
+    @Override
+    public ResponseEntity<List<Tourist>> findTouristsByGenderAndSkillCategoryAndGroup(List<String> genders,
+                                                                                      List<SkillCategory> skillCategories,
+                                                                                      Integer minBirthYear, Integer maxBirthYear,
+                                                                                      Long groupId) {
+        return ResponseEntity.ok(touristService.findTouristsByGenderAndSkillCategoryAndGroup(genders, skillCategories, minBirthYear, maxBirthYear, groupId));
+    }
+
+    @Override
+    public ResponseEntity<List<Tourist>> findTouristsByAttendedPlace(Long placeId) {
+        return ResponseEntity.ok(touristService.findTouristsByGenderAndSkillAndAttendedPlace(placeId));
+    }
+
+    @Override
+    public ResponseEntity<List<Tourist>> findTouristsByGroupWhoHadTripWithTrainer(Long groupId) {
+        return ResponseEntity.ok(touristService.findTouristsByGroupWhoHadTripWithTrainer(groupId));
+    }
+
+    @Override
+    public ResponseEntity<List<Tourist>> findTouristsByTakenRoutes(Long groupId, List<Long> routeIds) {
+        return ResponseEntity.ok(touristService.findTouristsByTakenRoutes(groupId, routeIds));
+    }
 }

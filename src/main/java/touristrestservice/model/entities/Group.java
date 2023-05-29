@@ -13,7 +13,7 @@ import java.util.Set;
 @Setter
 @ToString
 @Table(name = "section_group")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "tourists"})
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler", "tourists"}, allowSetters = true)
 public class Group extends BaseEntity {
     private String name;
 

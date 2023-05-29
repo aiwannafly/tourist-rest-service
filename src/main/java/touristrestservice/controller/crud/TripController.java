@@ -1,9 +1,12 @@
 package touristrestservice.controller.crud;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import touristrestservice.api.crud.TripApi;
+import touristrestservice.model.entities.Tourist;
+import touristrestservice.model.entities.Trainer;
 import touristrestservice.model.entities.Trip;
 import touristrestservice.service.BaseService;
 import touristrestservice.service.TripService;
@@ -37,19 +40,35 @@ public class TripController extends BaseController<Trip> implements TripApi {
     }
 
     @Override
-    public ResponseEntity<Trip> create(Trip value) {
-        value.setEndDate(new Date(value.getStartDate().getTime() + value.getDurationDays() * 24 * 60 * 60 * 1000));
-        return super.create(value);
+    public ResponseEntity create(Trip value) {
+        try {
+            value.setEndDate(calcEndDate(value));
+            return super.create(value);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
     @Override
-    public ResponseEntity<Trip> update(Long id, Trip value) {
-        value.setEndDate(new Date(value.getStartDate().getTime() + value.getDurationDays() * 24 * 60 * 60 * 1000));
-        return super.update(id, value);
+    public ResponseEntity update(Long id, Trip value) {
+        try {
+            value.setEndDate(calcEndDate(value));
+            return super.update(id, value);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    private Date calcEndDate(Trip value) {
+        return new Date(value.getStartDate().getTime() + value.getDurationDays() * 24 * 60 * 60 * 1000);
     }
 
     @Override
-    public ResponseEntity<Long> delete(Long id) {
-        return super.delete(id);
+    public ResponseEntity delete(Long id) {
+        try {
+            return super.delete(id);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 }

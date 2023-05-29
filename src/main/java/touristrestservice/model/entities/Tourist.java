@@ -16,7 +16,7 @@ import java.util.Set;
 @Setter
 @ToString
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler", "attendedActivities",
-"trips", "competitions"})
+"trips", "competitions"}, allowSetters = true)
 public class Tourist extends BaseEntity {
     private String gender;
 

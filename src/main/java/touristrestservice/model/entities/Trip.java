@@ -2,9 +2,9 @@ package touristrestservice.model.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.context.annotation.Lazy;
 import touristrestservice.model.entities.enums.SkillCategory;
 
 import java.sql.Date;

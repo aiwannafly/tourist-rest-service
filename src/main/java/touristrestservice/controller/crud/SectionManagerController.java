@@ -1,10 +1,12 @@
 package touristrestservice.controller.crud;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import touristrestservice.api.crud.SectionManagerApi;
 import touristrestservice.model.entities.SectionManager;
+import touristrestservice.model.entities.Tourist;
 import touristrestservice.service.BaseService;
 import touristrestservice.service.SectionManagerService;
 
@@ -36,17 +38,29 @@ public class SectionManagerController extends BaseController<SectionManager> imp
     }
 
     @Override
-    public ResponseEntity<SectionManager> create(SectionManager value) {
-        return super.create(value);
+    public ResponseEntity create(SectionManager value) {
+        try {
+            return super.create(value);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
     @Override
-    public ResponseEntity<SectionManager> update(Long id, SectionManager value) {
-        return super.update(id, value);
+    public ResponseEntity update(Long id, SectionManager value) {
+        try {
+            return super.update(id, value);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
     @Override
-    public ResponseEntity<Long> delete(Long id) {
-        return super.delete(id);
+    public ResponseEntity delete(Long id) {
+        try {
+            return super.delete(id);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 }

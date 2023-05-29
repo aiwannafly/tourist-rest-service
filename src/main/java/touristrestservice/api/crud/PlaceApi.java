@@ -3,30 +3,26 @@ package touristrestservice.api.crud;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import touristrestservice.config.Constants;
-import touristrestservice.model.entities.Trainer;
+import touristrestservice.model.entities.Place;
 
-import java.sql.Date;
 import java.util.List;
 
 @RequestMapping(Constants.BASE_API_PATH)
-public interface TrainerApi {
-    String API = "/trainer";
+public interface PlaceApi {
+    String API = "/place";
 
     @GetMapping(value = API + "/{id}", produces = "application/json")
-    ResponseEntity<Trainer> getById(@PathVariable("id") Long id);
+    ResponseEntity<Place> getById(@PathVariable("id") Long id);
 
     @GetMapping(value = API + "s", produces = "application/json")
-    ResponseEntity<List<Trainer>> getAll();
+    ResponseEntity<List<Place>> getAll();
 
     @PostMapping(value = API, produces = "application/json")
-    ResponseEntity<Trainer> create(@RequestBody Trainer value);
+    ResponseEntity<Place> create(@RequestBody Place value);
 
     @PostMapping(value = API + "/{id}", produces = "application/json")
-    ResponseEntity<Trainer> update(@PathVariable("id") Long id, @RequestBody Trainer value);
+    ResponseEntity<Place> update(@PathVariable("id") Long id, @RequestBody Place value);
 
     @DeleteMapping(value = API + "/{id}")
     ResponseEntity<Long> delete(@PathVariable("id") Long id);
-
-    @GetMapping(value = API + "/{id}/hours", produces = "application/json")
-    ResponseEntity<Integer> getWorkHours(@PathVariable("id") Long id, @RequestParam Date startDate, @RequestParam Date endDate);
 }
